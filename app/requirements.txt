@@ -1,0 +1,12 @@
+
+
+uvicorn
+fastapi
+uvicorn[standard]
+SQLAlchemy
+aiosqlite
+pydantic
+python-jose[cryptography]
+passlib[bcrypt]
+python-multipart
+psycopg2-binary

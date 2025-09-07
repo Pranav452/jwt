@@ -1,0 +1,4 @@
+venv/
+.fastapicloud/
+__pycache__/
+.env
