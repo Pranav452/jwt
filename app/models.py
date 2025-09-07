@@ -21,5 +21,18 @@ class Groups(Base):
     members = Column(ARRAY(Integer), nullable=False)
     created_at = Column(DateTime, default=datetime.now)
 
+class Expenses(Base):
+    __tablename__ = "expenses"
+   
+    id = Column(Integer, primary_key=True, index=True)
+    group_id = Column(Integer, nullable=False)
+    description = Column(String, nullable=False)
+    amount = Column(Integer, nullable=False)
+    paid_by = Column(Integer, nullable=False)
+    split_between = Column(ARRAY(Integer), nullable=False)
+    created_at = Column(DateTime, default=datetime.now)
+  
+
+
 
         

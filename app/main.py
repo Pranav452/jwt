@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from app.db import Base, engine
-from app.routers import users, groups
+from app.routers import users, groups, expenses
 
 from contextlib import asynccontextmanager
 
@@ -17,6 +17,7 @@ def root():
 
 app.include_router(users.router)
 app.include_router(groups.router)
+app.include_router(expenses.router)
 
 # To enable 'reload' or 'workers', run with:
 # uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload

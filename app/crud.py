@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from app.models import User, Groups
-from app.schemas import UserCreate, GroupsCreate
+from app.schemas import UserCreate, GroupsCreate, ExpensesCreate
 from app.auth.hashing import hash_password
 
 def get_user_by_email(db: Session, email: str):
@@ -54,3 +54,29 @@ def add_member_to_group(db: Session, group_id: int, user_id: int):
         db.commit()
         db.refresh(group)
     return group
+
+def create_expense_for_group(db: Session, group_id: int, expense_data):
+    """
+    Creates a new expense for a specific group.
+    Expects: amount, description, paid_by, split_between
+    """
+    from .models import Expense  # Assuming Expense model exists
+    expense = Expense(
+        group_id=group_id,
+        amount=expense_data.amount,
+        description=expense_data.description,
+        paid_by=expense_data.paid_by,
+        split_between=expense_data.split_between,
+        created_at=expense_data.created_at
+    )
+    db.add(expense)
+    db.commit()
+    db.refresh(expense)
+    return expense
+
+def get_expenses_by_group_id(db: Session, group_id: int):
+    """
+    Returns a list of all expenses for the specified group.
+    """
+    from .models import Expense  # Assuming Expense model exists
+    return db.query(Expense).filter(Expense.group_id == group_id).all()

@@ -32,3 +32,20 @@ class GroupsOut(GroupsBase):
     created_at: datetime
     class Config:
         from_attributes = True
+
+class ExpensesBase(BaseModel):
+    group_id: int
+    description: str
+    amount: int
+    paid_by: int
+    split_between: list[int]
+    created_at: datetime
+
+class ExpensesCreate(ExpensesBase):
+    pass
+
+class ExpensesOut(ExpensesBase):
+    id: int
+    created_at: datetime
+    class Config:
+        from_attributes = True
